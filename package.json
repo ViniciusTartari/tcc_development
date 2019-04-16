@@ -1,0 +1,19 @@
+{
+  "name": "tcc_development",
+  "version": "1.0.0",
+  "description": "TCC Development - Vinicius Tartari",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/viniciustartari/tcc_development.git"
+  },
+  "author": "Vinicius Tartari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/viniciustartari/tcc_development/issues"
+  },
+  "homepage": "https://gitlab.com/viniciustartari/tcc_development#readme"
+}
