@@ -16,10 +16,7 @@ Pode receber parâmetros como domínios que podem acessar, entre outros;
 app.use(cors());
 
 //Iniciando o DB
-mongoose.connect(
-  "mongodb://localhost:27017/tcc",
-  { useNewUrlParser: true }
-);
+mongoose.connect("mongodb://localhost:27017/tcc", { useNewUrlParser: true });
 
 //Chama os models
 requireDir("./src/models");
@@ -27,4 +24,4 @@ requireDir("./src/models");
 //Rotas
 app.use("/api", require("./src/routes"));
 
-app.listen(3001);
+app.listen(3000);
