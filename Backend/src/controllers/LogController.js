@@ -8,7 +8,7 @@ module.exports = {
    * Create and Read only
    */
   //Create
-  async createImageBitmap(req, res) {
+  async create(req, res) {
     const log = await Log.create(req.body);
     return res.json(log);
   },
