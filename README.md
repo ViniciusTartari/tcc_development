@@ -19,6 +19,9 @@
 - `Socket.io`
 - `Cors`
 - `Require-dir`
+- `Mosca`
+- `Bunyan`
+- `Mqtt`
 - `Mongoose*`
 - `Nodemon*`
 
