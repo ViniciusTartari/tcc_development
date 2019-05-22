@@ -59,9 +59,10 @@ app.use("/api", require("./src/routes"));
 
 app.listen(3000);
 
-//test
-// Colocar acesso direto ao banco aqui...
-const LogController = require("./src/controllers/LogController");
+// -----------------------------------------------------------------------
+/**
+ * MOSCA REQUESTS
+ */
 
 chamaApi = log => {
   axios
@@ -75,8 +76,6 @@ chamaApi = log => {
 
 // Dispara quando um cliente se conecta
 moscaServer.on("clientConnected", function(packet) {
-  // console.log("Client Connected:", client.id);
-  // Enviar para log
   const log = {
     log_type: "connect",
     log_client: packet.id
@@ -88,8 +87,6 @@ moscaServer.on("clientConnected", function(packet) {
 
 // Dispara quando um cliente se desconecta
 moscaServer.on("clientDisconnected", function(packet) {
-  // console.log("Client Disconnected:", client.id);
-  // enviar para log
   const log = {
     log_type: "disconnect",
     log_client: packet.id
