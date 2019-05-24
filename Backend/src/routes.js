@@ -15,6 +15,7 @@ const routes = express.Router();
  * Controllers
  */
 const UserController = require("./controllers/UserController");
+const MeterController = require("./controllers/MeterController");
 const SolarPanelController = require("./controllers/SolarPanelController");
 const WindGeneratorController = require("./controllers/WindGeneratorController");
 const LogController = require("./controllers/LogController");
@@ -27,6 +28,15 @@ routes.get("/user", UserController.read);
 routes.get("/user/:id", UserController.read);
 routes.put("/user/:id", UserController.update);
 routes.delete("/user/:id", UserController.delete);
+
+/**
+ * Routes - Meter - CRUD
+ */
+routes.post("/meter", MeterController.create);
+routes.get("/meter", MeterController.read);
+routes.get("/meter/:id", MeterController.read);
+routes.put("/meter/:id", MeterController.update);
+routes.delete("/meter/:id", MeterController.delete);
 
 /**
  * Routes - SolarPanel - CRUD

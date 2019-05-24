@@ -18,11 +18,15 @@
 - `Axios`
 - `Socket.io`
 - `Cors`
+- `Bunyan`
+- `Morgan`
+- `Mqtt`
 - `Require-dir`
 - `Mosca`
 - `Bunyan`
 - `Mqtt`
 - `Mongoose*`
+- `Mongoose-paginate`
 - `Nodemon*`
 
 \*_Dependência de desenvolvimento_
