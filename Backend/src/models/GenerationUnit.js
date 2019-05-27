@@ -14,18 +14,18 @@ const GenerationUnitSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  gu_model: {
+    // Modelo da unidade geradora (Se tiver)
+    type: String,
+    required: false
+  },
   gu_microgrid: {
-    // Identificador da microrrede que a unidade está
+    // Identificador da microrrede que a unidade está vinculada
     type: String,
     required: true
   },
   gu_type: {
     // Solar, eólica ou PCH
-    type: String,
-    required: false
-  },
-  gu_model: {
-    // Modelo do gerador para cruzar informações com a tabela do otimizador
     type: String,
     required: false
   },
@@ -44,6 +44,17 @@ const GenerationUnitSchema = new mongoose.Schema({
      *   resposta em altura de água de reservatório [m]
      */
     type: Number,
+    required: false
+  },
+  gu_powerCurve: {
+    /**
+     * Curva de potência do gerador - Array de objetos
+     * {
+     *    in, // Valor lido do sensor
+     *    out // Potência gerada com base no valor de entrada ("in")
+     * }
+     */
+    type: Array,
     required: false
   }
 });

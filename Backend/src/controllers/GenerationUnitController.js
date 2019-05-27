@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const GenerationUnit = mongoose.model("GeneratingUnit");
+const GenerationUnit = mongoose.model("GenerationUnit");
 
 module.exports = {
   /*
