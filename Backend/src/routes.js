@@ -15,9 +15,7 @@ const routes = express.Router();
  * Controllers
  */
 const UserController = require("./controllers/UserController");
-const MeterController = require("./controllers/MeterController");
-const SolarPanelController = require("./controllers/SolarPanelController");
-const WindGeneratorController = require("./controllers/WindGeneratorController");
+const GenerationUnitController = require("./controllers/GenerationUnitController");
 const LogController = require("./controllers/LogController");
 
 /**
@@ -30,31 +28,13 @@ routes.put("/user/:id", UserController.update);
 routes.delete("/user/:id", UserController.delete);
 
 /**
- * Routes - Meter - CRUD
+ * Routes - GenerationUnit - CRUD
  */
-routes.post("/meter", MeterController.create);
-routes.get("/meter", MeterController.read);
-routes.get("/meter/:id", MeterController.read);
-routes.put("/meter/:id", MeterController.update);
-routes.delete("/meter/:id", MeterController.delete);
-
-/**
- * Routes - SolarPanel - CRUD
- */
-routes.post("/solarpanel", SolarPanelController.create);
-routes.get("/solarpanel", SolarPanelController.read);
-routes.get("/solarpanel/:id", SolarPanelController.read);
-routes.put("/solarpanel/:id", SolarPanelController.update);
-routes.delete("/solarpanel/:id", SolarPanelController.delete);
-
-/**
- * Routes - WindGenerator - CRUD
- */
-routes.post("/windgenerator", WindGeneratorController.create);
-routes.get("/windgenerator", WindGeneratorController.read);
-routes.get("/windgenerator/:id", WindGeneratorController.read);
-routes.put("/windgenerator/:id", WindGeneratorController.update);
-routes.delete("/windgenerator/:id", WindGeneratorController.delete);
+routes.post("/generationunit", GenerationUnitController.create);
+routes.get("/generationunit", GenerationUnitController.read);
+routes.get("/generationunit/:id", GenerationUnitController.read);
+routes.put("/generationunit/:id", GenerationUnitController.update);
+routes.delete("/generationunit/:id", GenerationUnitController.delete);
 
 /**
  * Routes - Log - CR only
