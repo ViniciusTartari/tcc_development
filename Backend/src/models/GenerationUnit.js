@@ -22,7 +22,7 @@ const GenerationUnitSchema = new mongoose.Schema({
   gu_microgrid: {
     // Identificador da microrrede que a unidade está vinculada
     type: String,
-    required: true
+    required: false
   },
   gu_type: {
     // Solar, eólica ou PCH
@@ -55,6 +55,16 @@ const GenerationUnitSchema = new mongoose.Schema({
      * }
      */
     type: Array,
+    required: false
+  },
+  gu_active: {
+    // Define se a unidade geradora esta ativa
+    type: Boolean,
+    required: false
+  },
+  gu_available: {
+    // Define se a unidade geradora esta disponivel para gerar
+    type: Boolean,
     required: false
   }
 });
