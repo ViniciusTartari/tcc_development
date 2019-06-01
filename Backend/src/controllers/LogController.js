@@ -22,5 +22,29 @@ module.exports = {
       const log = await Log.find({});
       return res.json(log);
     }
+  },
+
+  // Get by type
+  async getByType(req, res) {
+    const log = await Log.find({
+      log_type: req.params.type
+    });
+    if (log.length == 0) {
+      return res.sendStatus(404);
+    }
+
+    return res.json(log);
+  },
+
+  // Get by generation unit name
+  async getByGU(req, res) {
+    const log = await Log.find({
+      log_guName: req.params.guName
+    });
+    if (log.length == 0) {
+      return res.sendStatus(404);
+    }
+
+    return res.json(log);
   }
 };
