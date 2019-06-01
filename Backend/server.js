@@ -46,7 +46,7 @@ Pode receber parâmetros como domínios que podem acessar, entre outros;
 app.use(cors());
 
 // Mostra as requisicoes http que o servidor receber no console;
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 
 //Iniciando o DB
 mongoose.connect("mongodb://localhost:27017/tcc", { useNewUrlParser: true });
@@ -64,12 +64,41 @@ app.listen(3000);
  * MOSCA REQUESTS
  */
 
-chamaApi = log => {
+// Função que envia os dados para a api de log
+sendLog = log => {
   axios
     .request({
       method: "post",
       url: "http://localhost:3000/api/log",
       data: log
+    })
+    .catch(err => console.log(err));
+};
+
+// Função que envia os dados do sensor da unidade geradora para a api
+sendInfo = async log => {
+  var arrayinfo = log.log_topic.split("/");
+
+  const guId = await axios
+    .request({
+      method: "get",
+      url: `http://localhost:3000/api/generationunit/name/${arrayinfo[2]}`
+    })
+    .catch(err => console.log(err));
+
+  //console.log(guId.data[0]._id);
+
+  const obj = {
+    gu_name: arrayinfo[2],
+    gu_microgrid: arrayinfo[1],
+    gu_meter: log.log_payload
+  };
+
+  await axios
+    .request({
+      method: "put",
+      url: `http://localhost:3000/api/generationunit/${guId.data[0]._id}`,
+      data: obj
     })
     .catch(err => console.log(err));
 };
@@ -80,7 +109,7 @@ moscaServer.on("clientConnected", function(packet) {
     log_type: "connect",
     log_client: packet.id
   };
-  chamaApi(log);
+  sendLog(log);
 
   console.log("Cliente " + log.log_client + " conectado!");
 });
@@ -91,7 +120,7 @@ moscaServer.on("clientDisconnected", function(packet) {
     log_type: "disconnect",
     log_client: packet.id
   };
-  chamaApi(log);
+  sendLog(log);
 
   console.log("Cliente " + log.log_client + " desconectado!");
 });
@@ -107,7 +136,7 @@ moscaServer.on("published", function(packet) {
         log_topic: payload.topic,
         log_messageId: packet.messageId
       };
-      chamaApi(log);
+      sendLog(log);
 
       console.log(
         "Cliente " +
@@ -121,10 +150,10 @@ moscaServer.on("published", function(packet) {
       const log = {
         log_type: "unsubscribe",
         log_client: payload.clientId,
-        log_topic: packet.topic,
+        log_topic: payload.topic,
         log_messageId: packet.messageId
       };
-      chamaApi(log);
+      sendLog(log);
 
       console.log(
         "Cliente " +
@@ -142,15 +171,12 @@ moscaServer.on("published", function(packet) {
       // Converte o payload de Buffer para String
       log_payload: packet.payload.toString("utf8")
     };
-    chamaApi(log);
+    sendLog(log);
     console.log(
-      "Publicado no topico " +
-        log.log_topic +
-        " o valor " +
-        log.log_payload +
-        "!"
+      "Publicado no topico " + log.log_topic + " o valor: " + log.log_payload
     );
-  }
 
-  // enviar para tratamento
+    // Envia para a tabela de informacao das unidades geradoras
+    //sendInfo(log);
+  }
 });
