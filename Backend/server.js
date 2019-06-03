@@ -57,6 +57,7 @@ requireDir("./src/models");
 //Rotas
 app.use("/api", require("./src/routes"));
 
+console.log("API server is up and running!");
 app.listen(3000);
 
 // -----------------------------------------------------------------------
@@ -88,22 +89,40 @@ sendInfo = async log => {
 
   //console.log(guId.data[0]._id);
 
-  const obj = {
-    gu_name: arrayinfo[2],
-    gu_microgrid: arrayinfo[1],
-    gu_meter: log.log_payload
-  };
+  if (log.log_type == "connect") {
+    changeGUState(guId, true);
+  } else if (log.log_type == "disconnect") {
+    changeGUState(guId, false);
+  } else {
+    const obj = {
+      gu_name: arrayinfo[2],
+      gu_microgrid: arrayinfo[1],
+      gu_meter: log.log_payload
+    };
 
+    await axios
+      .request({
+        method: "put",
+        url: `http://localhost:3000/api/generationunit/${guId.data[0]._id}`,
+        data: obj
+      })
+      .catch(err => console.log(err));
+  }
+};
+
+changeGUState = async (guId, state) => {
   await axios
     .request({
       method: "put",
       url: `http://localhost:3000/api/generationunit/${guId.data[0]._id}`,
-      data: obj
+      data: {
+        gu_available: state
+      }
     })
     .catch(err => console.log(err));
 };
 
-// Dispara quando um cliente se conecta
+// Dispara quando um cliente (unidade geradora) se conecta
 moscaServer.on("clientConnected", function(packet) {
   const log = {
     log_type: "connect",
@@ -111,7 +130,7 @@ moscaServer.on("clientConnected", function(packet) {
   };
   sendLog(log);
 
-  console.log("Cliente " + log.log_client + " conectado!");
+  console.log("Microrrede " + log.log_client + " conectada!");
 });
 
 // Dispara quando um cliente se desconecta
@@ -122,7 +141,7 @@ moscaServer.on("clientDisconnected", function(packet) {
   };
   sendLog(log);
 
-  console.log("Cliente " + log.log_client + " desconectado!");
+  console.log("Microrrede " + log.log_client + " disconectada!");
 });
 
 // Dispara quando uma mensagem eh publicada
@@ -172,9 +191,7 @@ moscaServer.on("published", function(packet) {
       log_payload: packet.payload.toString("utf8")
     };
     sendLog(log);
-    console.log(
-      "Publicado no topico " + log.log_topic + " o valor: " + log.log_payload
-    );
+    console.log(log.log_topic + " - " + log.log_payload);
 
     // Envia para a tabela de informacao das unidades geradoras
     //sendInfo(log);
