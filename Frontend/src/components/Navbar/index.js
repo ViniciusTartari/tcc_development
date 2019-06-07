@@ -27,7 +27,7 @@ export default class Navbar extends Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {this.state.username} - Logout
+              {this.state.username} - Logout{" "}
               <i className="fas fa-user-circle fa-fw" />
             </a>
           </li>
