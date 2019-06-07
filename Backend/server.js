@@ -46,7 +46,7 @@ Pode receber parâmetros como domínios que podem acessar, entre outros;
 app.use(cors());
 
 // Mostra as requisicoes http que o servidor receber no console;
-//app.use(morgan("dev"));
+app.use(morgan("dev"));
 
 //Iniciando o DB
 mongoose.connect("mongodb://localhost:27017/tcc", { useNewUrlParser: true });
