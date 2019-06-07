@@ -17,6 +17,7 @@ const routes = express.Router();
 const UserController = require("./controllers/UserController");
 const GUController = require("./controllers/GenerationUnitController");
 const LogController = require("./controllers/LogController");
+const SRController = require("./controllers/SINRequestController");
 
 /**
  * Optimizer
@@ -56,10 +57,26 @@ routes.get("/generationunit/name/:name", GUController.getByName);
 routes.get("/generationunit/model/:model", GUController.getByModel);
 // Get by microgrid
 routes.get("/generationunit/microgrid/:microgrid", GUController.getByMicrogrid);
+// Get sum by type
+routes.get("/generationunit/typesum", GUController.typeSum);
 // Get GU actives
 routes.get("/generationunit/active/:status", GUController.actives);
 // Get GU availables
 routes.get("/generationunit/available/:status", GUController.availables);
+
+/**
+ * SINRequests
+ */
+// Create
+routes.post("/sinrequest", SRController.create);
+// Read without params
+routes.get("/sinrequest", SRController.read);
+// Read with params
+routes.get("/sinrequest/:id", SRController.read);
+// Update
+routes.put("/sinrequest/:id", SRController.update);
+// Delete
+routes.delete("/sinrequest/:id", SRController.delete);
 
 /**
  * Log
