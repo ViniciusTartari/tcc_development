@@ -13,9 +13,21 @@ export default class Sidebar extends Component {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/dashboard/generationinfo" className="nav-link">
+            <i className="fas fa-fw fa-bolt" />
+            <span>Geração atual</span>
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/dashboard/charts" className="nav-link">
             <i className="fas fa-fw fa-chart-area" />
             <span> Gráficos</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/dashboard/microgrids" className="nav-link">
+            <i className="fas fa-fw fa-network-wired" />
+            <span> Microrredes</span>
           </Link>
         </li>
         <li className="nav-item">
