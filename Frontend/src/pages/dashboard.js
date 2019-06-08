@@ -82,10 +82,10 @@ export default class Dashboard extends Component {
                       <div className="card-body-icon">
                         <i className="fas fa-fw fa-comments" />
                       </div>
-                      <div className="mr-5">Unidades Geradoras</div>
+                      <div className="mr-5">Geração atual</div>
                     </div>
                     <Link
-                      to="/dashboard/generationunits"
+                      to="/dashboard/generationinfo"
                       className="card-footer text-white clearfix small z-1"
                     >
                       <span className="float-left">Ver detalhes</span>
@@ -101,7 +101,7 @@ export default class Dashboard extends Component {
                       <div className="card-body-icon">
                         <i className="fas fa-fw fa-list" />
                       </div>
-                      <div className="mr-5">Demanda</div>
+                      <div className="mr-5">Gráficos de geração</div>
                     </div>
                     <Link
                       to="/dashboard/charts"
@@ -139,10 +139,10 @@ export default class Dashboard extends Component {
                       <div className="card-body-icon">
                         <i className="fas fa-fw fa-life-ring" />
                       </div>
-                      <div className="mr-5">Geração</div>
+                      <div className="mr-5">Unidades Geradoras</div>
                     </div>
                     <Link
-                      to="/dashboard/generationinfo"
+                      to="/dashboard/generationunits"
                       className="card-footer text-white clearfix small z-1"
                     >
                       <span className="float-left">Ver detalhes</span>
