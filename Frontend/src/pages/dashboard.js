@@ -123,7 +123,7 @@ export default class Dashboard extends Component {
                       <div className="mr-5">Microrredes</div>
                     </div>
                     <Link
-                      to="/dashboard/charts"
+                      to="/dashboard/microgrids"
                       className="card-footer text-white clearfix small z-1"
                     >
                       <span className="float-left">Ver detalhes</span>
@@ -142,7 +142,7 @@ export default class Dashboard extends Component {
                       <div className="mr-5">Geração</div>
                     </div>
                     <Link
-                      to="/dashboard/charts"
+                      to="/dashboard/generationinfo"
                       className="card-footer text-white clearfix small z-1"
                     >
                       <span className="float-left">Ver detalhes</span>
