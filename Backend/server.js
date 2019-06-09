@@ -64,64 +64,6 @@ app.listen(3000);
 /**
  * MOSCA REQUESTS
  */
-
-// Função que envia os dados para a api de log
-sendLog = log => {
-  axios
-    .request({
-      method: "post",
-      url: "http://localhost:3000/api/log",
-      data: log
-    })
-    .catch(err => console.log(err));
-};
-
-// Função que envia os dados do sensor da unidade geradora para a api
-sendInfo = async log => {
-  var arrayinfo = log.log_topic.split("/");
-
-  const guId = await axios
-    .request({
-      method: "get",
-      url: `http://localhost:3000/api/generationunit/name/${arrayinfo[2]}`
-    })
-    .catch(err => console.log(err));
-
-  //console.log(guId.data[0]._id);
-
-  if (log.log_type == "connect") {
-    changeGUState(guId, true);
-  } else if (log.log_type == "disconnect") {
-    changeGUState(guId, false);
-  } else {
-    const obj = {
-      gu_name: arrayinfo[2],
-      gu_microgrid: arrayinfo[1],
-      gu_meter: log.log_payload
-    };
-
-    await axios
-      .request({
-        method: "put",
-        url: `http://localhost:3000/api/generationunit/${guId.data[0]._id}`,
-        data: obj
-      })
-      .catch(err => console.log(err));
-  }
-};
-
-changeGUState = async (guId, state) => {
-  await axios
-    .request({
-      method: "put",
-      url: `http://localhost:3000/api/generationunit/${guId.data[0]._id}`,
-      data: {
-        gu_available: state
-      }
-    })
-    .catch(err => console.log(err));
-};
-
 // Dispara quando um cliente (unidade geradora) se conecta
 moscaServer.on("clientConnected", function(packet) {
   const log = {
@@ -140,6 +82,9 @@ moscaServer.on("clientDisconnected", function(packet) {
     log_client: packet.id
   };
   sendLog(log);
+
+  //enviar available false para todas as gu da mg
+  handleDisconnect(log);
 
   console.log("Microrrede " + log.log_client + " disconectada!");
 });
@@ -194,6 +139,72 @@ moscaServer.on("published", function(packet) {
     console.log(log.log_topic + " - " + log.log_payload);
 
     // Envia para a tabela de informacao das unidades geradoras
-    //sendInfo(log);
+    sendInfo(log);
   }
 });
+
+/**
+ * TRATATIVAS - API
+ */
+
+// Função que envia os dados para a api de log
+sendLog = log => {
+  axios
+    .request({
+      method: "post",
+      url: "http://localhost:3000/api/log",
+      data: log
+    })
+    .catch(err => console.log(err));
+};
+
+// Função que envia os dados do sensor da unidade geradora para a api
+sendInfo = async log => {
+  var arrayinfo = log.log_topic.split("/");
+  //console.log(arrayinfo);
+
+  const guId = await axios
+    .request({
+      method: "get",
+      url: `http://localhost:3000/api/generationunit/name/${arrayinfo[3]}`
+    })
+    .catch(err => console.log(err));
+
+  // console.log(guId.data[0]._id);
+  let obj;
+
+  if (arrayinfo[4] == "available") {
+    obj = {
+      gu_available: log.log_payload
+    };
+  } else {
+    obj = {
+      gu_meter: log.log_payload
+    };
+  }
+
+  await axios.request({
+    method: "put",
+    url: `http://localhost:3000/api/generationunit/${guId.data[0]._id}`,
+    data: obj
+  });
+};
+
+handleDisconnect = async log => {
+  const GUs = await axios
+    .request({
+      method: "get",
+      url: `http://localhost:3000/api/generationunit/microgrid/${
+        log.log_client
+      }`
+    })
+    .catch(err => console.log(err));
+
+  GUs.data.map(async gu => {
+    await axios.request({
+      method: "put",
+      url: `http://localhost:3000/api/generationunit/${gu._id}`,
+      data: { gu_available: false }
+    });
+  });
+};
