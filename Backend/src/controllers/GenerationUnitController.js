@@ -99,3 +99,12 @@ module.exports = {
     return res.json(generationunit);
   }
 };
+
+/**
+ * Banco de pesquisas - MONGODB
+ */
+
+// db.getCollection('generationunits').aggregate([
+//   {$group:{_id: "$gu_microgrid", totalPower: {$sum: "$gu_maxPower"}}},
+//   {$sort: {_id: 1}}
+// ])
