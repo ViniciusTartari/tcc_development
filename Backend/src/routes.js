@@ -57,8 +57,6 @@ routes.get("/generationunit/name/:name", GUController.getByName);
 routes.get("/generationunit/model/:model", GUController.getByModel);
 // Get by microgrid
 routes.get("/generationunit/microgrid/:microgrid", GUController.getByMicrogrid);
-// Get sum by type
-routes.get("/generationunit/typesum", GUController.typeSum);
 // Get GU actives
 routes.get("/generationunit/active/:status", GUController.actives);
 // Get GU availables
@@ -91,10 +89,5 @@ routes.get("/log/:id", LogController.read);
 routes.get("/log/type/:type", LogController.getByType);
 // Get by generation unit name
 routes.get("/log/guname/:guName", LogController.getByGU);
-
-/**
- * Generation request
- */
-routes.post("/generationrequest", Optimizer.handleRequest);
 
 module.exports = routes;
