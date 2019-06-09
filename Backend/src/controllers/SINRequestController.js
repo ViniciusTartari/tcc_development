@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const SINRequest = mongoose.model("SINRequest");
 
+const optimizer = require("../optimizer");
+
 module.exports = {
   /*
    * CRUD
@@ -10,6 +12,7 @@ module.exports = {
   //Create
   async create(req, res) {
     const request = await SINRequest.create(req.body);
+    optimizer.handleRequest(request);
     return res.json(request);
   },
 
