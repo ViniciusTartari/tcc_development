@@ -1,0 +1,765 @@
+[
+  {
+    "gu_name": "GU1MG1",
+    "gu_model": "Eoltec Eólico Runner",
+    "gu_microgrid": "MicroGrid1",
+    "gu_type": "Eólico",
+    "gu_maxPower": 25000,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 1,
+        "out": 0
+      },
+      {
+        "in": 2,
+        "out": 0
+      },
+      {
+        "in": 3,
+        "out": 500
+      },
+      {
+        "in": 4,
+        "out": 1000
+      },
+      {
+        "in": 5,
+        "out": 2000
+      },
+      {
+        "in": 6,
+        "out": 3500
+      },
+      {
+        "in": 7,
+        "out": 5500
+      },
+      {
+        "in": 8,
+        "out": 8200
+      },
+      {
+        "in": 9,
+        "out": 11700
+      },
+      {
+        "in": 10,
+        "out": 16000
+      },
+      {
+        "in": 11,
+        "out": 21000
+      },
+      {
+        "in": 12,
+        "out": 25000
+      },
+      {
+        "in": 13,
+        "out": 25000
+      },
+      {
+        "in": 14,
+        "out": 25000
+      },
+      {
+        "in": 15,
+        "out": 25000
+      }
+    ]
+  },
+  {
+    "gu_name": "GU2MG1",
+    "gu_model": "Eoltec Sirocco",
+    "gu_microgrid": "MicroGrid1",
+    "gu_type": "Eólico",
+    "gu_maxPower": 6000,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 1,
+        "out": 0
+      },
+      {
+        "in": 2,
+        "out": 0
+      },
+      {
+        "in": 3,
+        "out": 0
+      },
+      {
+        "in": 4,
+        "out": 200
+      },
+      {
+        "in": 5,
+        "out": 500
+      },
+      {
+        "in": 6,
+        "out": 1100
+      },
+      {
+        "in": 7,
+        "out": 1800
+      },
+      {
+        "in": 8,
+        "out": 2700
+      },
+      {
+        "in": 9,
+        "out": 3800
+      },
+      {
+        "in": 10,
+        "out": 5000
+      },
+      {
+        "in": 11,
+        "out": 5700
+      },
+      {
+        "in": 12,
+        "out": 6000
+      },
+      {
+        "in": 13,
+        "out": 6000
+      },
+      {
+        "in": 14,
+        "out": 6000
+      },
+      {
+        "in": 15,
+        "out": 6000
+      }
+    ]
+  },
+  {
+    "gu_name": "GU3MG1",
+    "gu_model": "Fortis Eólico Energy - Alize",
+    "gu_microgrid": "MicroGrid1",
+    "gu_type": "Eólico",
+    "gu_maxPower": 10000,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 1,
+        "out": 0
+      },
+      {
+        "in": 2,
+        "out": 0
+      },
+      {
+        "in": 3,
+        "out": 0
+      },
+      {
+        "in": 4,
+        "out": 400
+      },
+      {
+        "in": 5,
+        "out": 1000
+      },
+      {
+        "in": 6,
+        "out": 1800
+      },
+      {
+        "in": 7,
+        "out": 2800
+      },
+      {
+        "in": 8,
+        "out": 3900
+      },
+      {
+        "in": 9,
+        "out": 5200
+      },
+      {
+        "in": 10,
+        "out": 6800
+      },
+      {
+        "in": 11,
+        "out": 8500
+      },
+      {
+        "in": 12,
+        "out": 9800
+      },
+      {
+        "in": 13,
+        "out": 10000
+      },
+      {
+        "in": 14,
+        "out": 10000
+      },
+      {
+        "in": 15,
+        "out": 10000
+      }
+    ]
+  },
+  {
+    "gu_name": "GU4MG1",
+    "gu_model": "Ropatec Spa - WRE.060",
+    "gu_microgrid": "MicroGrid1",
+    "gu_type": "Eólico",
+    "gu_maxPower": 6000,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 1,
+        "out": 0
+      },
+      {
+        "in": 2,
+        "out": 0
+      },
+      {
+        "in": 3,
+        "out": 50
+      },
+      {
+        "in": 4,
+        "out": 100
+      },
+      {
+        "in": 5,
+        "out": 250
+      },
+      {
+        "in": 6,
+        "out": 400
+      },
+      {
+        "in": 7,
+        "out": 700
+      },
+      {
+        "in": 8,
+        "out": 1000
+      },
+      {
+        "in": 9,
+        "out": 1500
+      },
+      {
+        "in": 10,
+        "out": 2000
+      },
+      {
+        "in": 11,
+        "out": 2700
+      },
+      {
+        "in": 12,
+        "out": 3500
+      },
+      {
+        "in": 13,
+        "out": 4500
+      },
+      {
+        "in": 14,
+        "out": 5600
+      },
+      {
+        "in": 15,
+        "out": 6000
+      }
+    ]
+  },
+  {
+    "gu_name": "GU1MG2",
+    "gu_model": "CanadianSolar CS6K-275P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 275,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 55
+      },
+      {
+        "in": 300,
+        "out": 82
+      },
+      {
+        "in": 400,
+        "out": 110
+      },
+      {
+        "in": 500,
+        "out": 137
+      },
+      {
+        "in": 600,
+        "out": 165
+      },
+      {
+        "in": 700,
+        "out": 192
+      },
+      {
+        "in": 800,
+        "out": 220
+      },
+      {
+        "in": 900,
+        "out": 248
+      },
+      {
+        "in": 1000,
+        "out": 275
+      }
+    ]
+  },
+  {
+    "gu_name": "GU2MG2",
+    "gu_model": "CanadianSolar CS6K-275P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 275,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 55
+      },
+      {
+        "in": 300,
+        "out": 82
+      },
+      {
+        "in": 400,
+        "out": 110
+      },
+      {
+        "in": 500,
+        "out": 137
+      },
+      {
+        "in": 600,
+        "out": 165
+      },
+      {
+        "in": 700,
+        "out": 192
+      },
+      {
+        "in": 800,
+        "out": 220
+      },
+      {
+        "in": 900,
+        "out": 248
+      },
+      {
+        "in": 1000,
+        "out": 275
+      }
+    ]
+  },
+  {
+    "gu_name": "GU3MG2",
+    "gu_model": "CanadianSolar CS6K-275P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 275,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 55
+      },
+      {
+        "in": 300,
+        "out": 82
+      },
+      {
+        "in": 400,
+        "out": 110
+      },
+      {
+        "in": 500,
+        "out": 137
+      },
+      {
+        "in": 600,
+        "out": 165
+      },
+      {
+        "in": 700,
+        "out": 192
+      },
+      {
+        "in": 800,
+        "out": 220
+      },
+      {
+        "in": 900,
+        "out": 248
+      },
+      {
+        "in": 1000,
+        "out": 275
+      }
+    ]
+  },
+  {
+    "gu_name": "GU4MG2",
+    "gu_model": "CanadianSolar CS6K-275P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 275,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 55
+      },
+      {
+        "in": 300,
+        "out": 82
+      },
+      {
+        "in": 400,
+        "out": 110
+      },
+      {
+        "in": 500,
+        "out": 137
+      },
+      {
+        "in": 600,
+        "out": 165
+      },
+      {
+        "in": 700,
+        "out": 192
+      },
+      {
+        "in": 800,
+        "out": 220
+      },
+      {
+        "in": 900,
+        "out": 248
+      },
+      {
+        "in": 1000,
+        "out": 275
+      }
+    ]
+  },
+  {
+    "gu_name": "GU5MG2",
+    "gu_model": "CanadianSolar CS6U-320P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 320,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 64
+      },
+      {
+        "in": 300,
+        "out": 96
+      },
+      {
+        "in": 400,
+        "out": 128
+      },
+      {
+        "in": 500,
+        "out": 160
+      },
+      {
+        "in": 600,
+        "out": 192
+      },
+      {
+        "in": 700,
+        "out": 224
+      },
+      {
+        "in": 800,
+        "out": 256
+      },
+      {
+        "in": 900,
+        "out": 288
+      },
+      {
+        "in": 1000,
+        "out": 320
+      }
+    ]
+  },
+  {
+    "gu_name": "GU6MG2",
+    "gu_model": "CanadianSolar CS6U-320P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 320,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 64
+      },
+      {
+        "in": 300,
+        "out": 96
+      },
+      {
+        "in": 400,
+        "out": 128
+      },
+      {
+        "in": 500,
+        "out": 160
+      },
+      {
+        "in": 600,
+        "out": 192
+      },
+      {
+        "in": 700,
+        "out": 224
+      },
+      {
+        "in": 800,
+        "out": 256
+      },
+      {
+        "in": 900,
+        "out": 288
+      },
+      {
+        "in": 1000,
+        "out": 320
+      }
+    ]
+  },
+  {
+    "gu_name": "GU7MG2",
+    "gu_model": "CanadianSolar CS6U-320P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 320,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 64
+      },
+      {
+        "in": 300,
+        "out": 96
+      },
+      {
+        "in": 400,
+        "out": 128
+      },
+      {
+        "in": 500,
+        "out": 160
+      },
+      {
+        "in": 600,
+        "out": 192
+      },
+      {
+        "in": 700,
+        "out": 224
+      },
+      {
+        "in": 800,
+        "out": 256
+      },
+      {
+        "in": 900,
+        "out": 288
+      },
+      {
+        "in": 1000,
+        "out": 320
+      }
+    ]
+  },
+  {
+    "gu_name": "GU8MG2",
+    "gu_model": "CanadianSolar CS6U-320P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 320,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 64
+      },
+      {
+        "in": 300,
+        "out": 96
+      },
+      {
+        "in": 400,
+        "out": 128
+      },
+      {
+        "in": 500,
+        "out": 160
+      },
+      {
+        "in": 600,
+        "out": 192
+      },
+      {
+        "in": 700,
+        "out": 224
+      },
+      {
+        "in": 800,
+        "out": 256
+      },
+      {
+        "in": 900,
+        "out": 288
+      },
+      {
+        "in": 1000,
+        "out": 320
+      }
+    ]
+  },
+  {
+    "gu_name": "GU9MG2",
+    "gu_model": "CanadianSolar CS6U-320P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 320,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 64
+      },
+      {
+        "in": 300,
+        "out": 96
+      },
+      {
+        "in": 400,
+        "out": 128
+      },
+      {
+        "in": 500,
+        "out": 160
+      },
+      {
+        "in": 600,
+        "out": 192
+      },
+      {
+        "in": 700,
+        "out": 224
+      },
+      {
+        "in": 800,
+        "out": 256
+      },
+      {
+        "in": 900,
+        "out": 288
+      },
+      {
+        "in": 1000,
+        "out": 320
+      }
+    ]
+  },
+  {
+    "gu_name": "GU10MG2",
+    "gu_model": "CanadianSolar CS6U-320P",
+    "gu_microgrid": "MicroGrid2",
+    "gu_type": "Solar",
+    "gu_maxPower": 320,
+    "gu_active": false,
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 200,
+        "out": 64
+      },
+      {
+        "in": 300,
+        "out": 96
+      },
+      {
+        "in": 400,
+        "out": 128
+      },
+      {
+        "in": 500,
+        "out": 160
+      },
+      {
+        "in": 600,
+        "out": 192
+      },
+      {
+        "in": 700,
+        "out": 224
+      },
+      {
+        "in": 800,
+        "out": 256
+      },
+      {
+        "in": 900,
+        "out": 288
+      },
+      {
+        "in": 1000,
+        "out": 320
+      }
+    ]
+  },
+  {
+    "gu_name": "GU1MG3",
+    "gu_model": "Vila Galupo (Rio Santana) - Bom Sucesso do Sul - PR",
+    "gu_microgrid": "MicroGrid3",
+    "gu_type": "PCH",
+    "gu_maxPower": 5670000,
+    "gu_active": false,
+    "gu_available": false
+  }
+]
