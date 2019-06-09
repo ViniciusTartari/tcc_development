@@ -10,7 +10,7 @@ const mqtt = require("mqtt");
 
 // Nome da microrrede simulada
 const microgridId = "MicroGrid1";
-const GUs = ["GU1MG1", "GU2MG1", "GU3MG1"];
+const GUs = ["GU1MG1", "GU2MG1", "GU3MG1", "GU4MG1"];
 
 // Configuracao do cliente MQTT - ADD EXPLICACAO DE CADA LINHA
 client_options = {
