@@ -9,7 +9,10 @@ const mosca = require("mosca");
 //Iniciando o app
 const app = express();
 
-//configuracoes do mosca - broker mqtt
+// -----------------------------------------------------------------------
+/**
+ * Configuração do mosca (Broker MQTT)
+ */
 const ascoltatore = {
   type: "mongo",
   url: "mongodb://localhost:27017/moscaTCC",
@@ -34,7 +37,9 @@ function setup() {
   console.log("Mosca server is up and running!");
 }
 
-//end mosca
+// Final da configuração do mosca (broker MQTT)
+
+// -----------------------------------------------------------------------
 
 //Permite a aplicação recebimento de json
 app.use(express.json());
@@ -46,7 +51,7 @@ Pode receber parâmetros como domínios que podem acessar, entre outros;
 app.use(cors());
 
 // Mostra as requisicoes http que o servidor receber no console;
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 //Iniciando o DB
 mongoose.connect("mongodb://localhost:27017/tcc", { useNewUrlParser: true });
@@ -57,32 +62,22 @@ requireDir("./src/models");
 //Rotas
 app.use("/api", require("./src/routes"));
 
+console.log("API server is up and running!");
 app.listen(3000);
 
 // -----------------------------------------------------------------------
 /**
  * MOSCA REQUESTS
  */
-
-chamaApi = log => {
-  axios
-    .request({
-      method: "post",
-      url: "http://localhost:3000/api/log",
-      data: log
-    })
-    .catch(err => console.log(err));
-};
-
-// Dispara quando um cliente se conecta
+// Dispara quando um cliente (unidade geradora) se conecta
 moscaServer.on("clientConnected", function(packet) {
   const log = {
     log_type: "connect",
     log_client: packet.id
   };
-  chamaApi(log);
+  sendLog(log);
 
-  console.log("Cliente " + log.log_client + " conectado!");
+  console.log(log.log_client + " conectad@!");
 });
 
 // Dispara quando um cliente se desconecta
@@ -91,9 +86,12 @@ moscaServer.on("clientDisconnected", function(packet) {
     log_type: "disconnect",
     log_client: packet.id
   };
-  chamaApi(log);
+  sendLog(log);
 
-  console.log("Cliente " + log.log_client + " desconectado!");
+  //enviar available false para todas as gu da mg
+  handleDisconnect(log);
+
+  console.log(log.log_client + " disconectad@!");
 });
 
 // Dispara quando uma mensagem eh publicada
@@ -107,7 +105,7 @@ moscaServer.on("published", function(packet) {
         log_topic: payload.topic,
         log_messageId: packet.messageId
       };
-      chamaApi(log);
+      sendLog(log);
 
       console.log(
         "Cliente " +
@@ -121,10 +119,10 @@ moscaServer.on("published", function(packet) {
       const log = {
         log_type: "unsubscribe",
         log_client: payload.clientId,
-        log_topic: packet.topic,
+        log_topic: payload.topic,
         log_messageId: packet.messageId
       };
-      chamaApi(log);
+      sendLog(log);
 
       console.log(
         "Cliente " +
@@ -142,15 +140,74 @@ moscaServer.on("published", function(packet) {
       // Converte o payload de Buffer para String
       log_payload: packet.payload.toString("utf8")
     };
-    chamaApi(log);
-    console.log(
-      "Publicado no topico " +
-        log.log_topic +
-        " o valor " +
-        log.log_payload +
-        "!"
-    );
+    sendLog(log);
+    //console.log(log.log_topic + " - " + log.log_payload);
+
+    // Envia para a tabela de informacao das unidades geradoras
+    sendInfo(log);
+  }
+});
+
+/**
+ * TRATATIVAS - API
+ */
+
+// Função que envia os dados para a api de log
+sendLog = log => {
+  axios
+    .request({
+      method: "post",
+      url: "http://localhost:3000/api/log",
+      data: log
+    })
+    .catch(err => console.log(err));
+};
+
+// Função que envia os dados do sensor da unidade geradora para a api
+sendInfo = async log => {
+  var arrayinfo = log.log_topic.split("/");
+
+  const guId = await axios
+    .request({
+      method: "get",
+      url: `http://localhost:3000/api/generationunit/name/${arrayinfo[3]}`
+    })
+    .catch(err => console.log(err));
+
+  let obj;
+
+  if (arrayinfo[4] == "available") {
+    obj = {
+      gu_available: log.log_payload
+    };
+  } else if (arrayinfo[4] == "meter") {
+    obj = {
+      gu_meter: log.log_payload
+    };
   }
 
-  // enviar para tratamento
-});
+  await axios.request({
+    method: "put",
+    url: `http://localhost:3000/api/generationunit/${guId.data[0]._id}`,
+    data: obj
+  });
+};
+
+handleDisconnect = async log => {
+  const GUs = await axios
+    .request({
+      method: "get",
+      url: `http://localhost:3000/api/generationunit/microgrid/${
+        log.log_client
+      }`
+    })
+    .catch(err => console.log(err));
+
+  GUs.data.map(async gu => {
+    await axios.request({
+      method: "put",
+      url: `http://localhost:3000/api/generationunit/${gu._id}`,
+      data: { gu_available: false, gu_active: false, gu_generating: 0 }
+    });
+  });
+};

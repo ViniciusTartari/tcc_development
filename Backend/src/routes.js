@@ -15,52 +15,89 @@ const routes = express.Router();
  * Controllers
  */
 const UserController = require("./controllers/UserController");
-const MeterController = require("./controllers/MeterController");
-const SolarPanelController = require("./controllers/SolarPanelController");
-const WindGeneratorController = require("./controllers/WindGeneratorController");
+const GUController = require("./controllers/GenerationUnitController");
 const LogController = require("./controllers/LogController");
+const SRController = require("./controllers/SINRequestController");
+const GenerationController = require("./controllers/GenerationController");
 
 /**
- * Routes - User - CRUD
+ * Optimizer
  */
+const Optimizer = require("./optimizer");
+
+/**
+ * User
+ */
+// Create
 routes.post("/user", UserController.create);
+// Read without params
 routes.get("/user", UserController.read);
+// Read with params
 routes.get("/user/:id", UserController.read);
+// Update
 routes.put("/user/:id", UserController.update);
+// Delete
 routes.delete("/user/:id", UserController.delete);
 
 /**
- * Routes - Meter - CRUD
+ * GenerationUnit
  */
-routes.post("/meter", MeterController.create);
-routes.get("/meter", MeterController.read);
-routes.get("/meter/:id", MeterController.read);
-routes.put("/meter/:id", MeterController.update);
-routes.delete("/meter/:id", MeterController.delete);
+// Create
+routes.post("/generationunit", GUController.create);
+// Read without params
+routes.get("/generationunit", GUController.read);
+// Read with params
+routes.get("/generationunit/:id", GUController.read);
+// Update
+routes.put("/generationunit/:id", GUController.update);
+// Delete
+routes.delete("/generationunit/:id", GUController.delete);
+// Get by name
+routes.get("/generationunit/name/:name", GUController.getByName);
+// Get by model
+routes.get("/generationunit/model/:model", GUController.getByModel);
+// Get microgrids
+routes.get("/microgrid", GUController.microgrids);
+// Get by microgrid
+routes.get("/generationunit/microgrid/:microgrid", GUController.getByMicrogrid);
+// Get GU actives
+routes.get("/generationunit/active/:status", GUController.actives);
+// Get GU availables
+routes.get("/generationunit/available/:status", GUController.availables);
 
 /**
- * Routes - SolarPanel - CRUD
+ * SINRequests
  */
-routes.post("/solarpanel", SolarPanelController.create);
-routes.get("/solarpanel", SolarPanelController.read);
-routes.get("/solarpanel/:id", SolarPanelController.read);
-routes.put("/solarpanel/:id", SolarPanelController.update);
-routes.delete("/solarpanel/:id", SolarPanelController.delete);
+// Create
+routes.post("/sinrequest", SRController.create);
+// Read without params
+routes.get("/sinrequest", SRController.read);
+// Read with params
+routes.get("/sinrequest/:id", SRController.read);
+// Update
+routes.put("/sinrequest/:id", SRController.update);
+// Delete
+routes.delete("/sinrequest/:id", SRController.delete);
 
 /**
- * Routes - WindGenerator - CRUD
+ * Log
  */
-routes.post("/windgenerator", WindGeneratorController.create);
-routes.get("/windgenerator", WindGeneratorController.read);
-routes.get("/windgenerator/:id", WindGeneratorController.read);
-routes.put("/windgenerator/:id", WindGeneratorController.update);
-routes.delete("/windgenerator/:id", WindGeneratorController.delete);
-
-/**
- * Routes - Log - CR only
- */
+// Create
 routes.post("/log", LogController.create);
+// Read without params
 routes.get("/log", LogController.read);
+// Read with params
 routes.get("/log/:id", LogController.read);
+// Get by type
+routes.get("/log/type/:type", LogController.getByType);
+// Get by generation unit name
+routes.get("/log/guname/:guName", LogController.getByGU);
+
+/**
+ * Generation
+ */
+// Create - Acesso interno
+// Read
+routes.get("/generation", GenerationController.read);
 
 module.exports = routes;

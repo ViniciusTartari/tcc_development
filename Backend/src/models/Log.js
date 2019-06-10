@@ -7,20 +7,11 @@ const LogSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  log_generator: {
+  log_guName: {
     type: String,
     required: false
   },
-  log_meter: {
-    type: String,
-    required: false
-  },
-  log_microgrid: {
-    type: String,
-    required: false
-  },
-  // User - Usuario(plataforma) que enviou a requisicao
-  log_user: {
+  log_guMeter: {
     type: String,
     required: false
   },
@@ -41,13 +32,12 @@ const LogSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+
   log_date: {
     type: Date,
     required: true,
     default: Date.now()
   }
-  //parametros enviados...
-  //maybe...messageId da requisicao mqtt?
 });
 
 LogSchema.plugin(mongoosePaginate);
