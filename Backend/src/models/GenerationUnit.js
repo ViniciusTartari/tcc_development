@@ -66,6 +66,11 @@ const GenerationUnitSchema = new mongoose.Schema({
     // Define se a unidade geradora esta disponivel para gerar
     type: Boolean,
     required: false
+  },
+  gu_generating: {
+    // Quantidade de energia sendo gerada no momento
+    type: Number,
+    required: false
   }
 });
 
