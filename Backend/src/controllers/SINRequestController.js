@@ -12,7 +12,11 @@ module.exports = {
   //Create
   async create(req, res) {
     const request = await SINRequest.create(req.body);
+
+    // Dispara o otimizador
+    // const optimized = await optimizer.handleRequest(request);
     optimizer.handleRequest(request);
+
     return res.json(request);
   },
 
@@ -22,7 +26,7 @@ module.exports = {
       const request = await SINRequest.findById(req.params.id);
       return res.json(request);
     } else {
-      const request = await SINRequest.find({});
+      const request = await SINRequest.find({}).sort({ sr_addedAt: -1 });
       return res.json(request);
     }
   },
