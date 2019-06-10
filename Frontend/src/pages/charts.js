@@ -22,10 +22,13 @@ export default class charts extends Component {
   }
 
   componentWillMount() {
-    this.getChartData();
+    this.getChart1Data();
+    this.getChart2Data();
+    this.getChart3Data();
+    this.getChart4Data();
   }
 
-  async getChartData() {
+  async getChart1Data() {
     await api.get("sinrequest").then(response => {
       this.setState({
         chartData1: {
@@ -45,7 +48,9 @@ export default class charts extends Component {
         updatedAt: response.data[0].sr_addedAt
       });
     });
+  }
 
+  async getChart2Data() {
     await api.get("generationunit").then(response => {
       let solar = 0,
         wind = 0,
@@ -58,7 +63,70 @@ export default class charts extends Component {
       });
 
       this.setState({
+        chartData2: {
+          labels: ["Solar", "Eólico", "PCH"],
+          datasets: [
+            {
+              label: "Power",
+              data: [solar, wind, pch],
+              borderWidth: 1,
+              backgroundColor: ["yellow", "green", "blue"],
+              borderColor: "#777",
+              hoverBorderWidth: 3,
+              hoverBorderColor: "#000"
+            }
+          ]
+        }
+      });
+    });
+  }
+
+  async getChart3Data() {
+    await api.get("generationunit/available/true").then(response => {
+      let solar = 0,
+        wind = 0,
+        pch = 0;
+
+      response.data.map(el => {
+        if (el.gu_type == "Solar") solar++;
+        if (el.gu_type == "PCH") pch++;
+        if (el.gu_type == "Eólico") wind++;
+      });
+
+      this.setState({
         chartData3: {
+          labels: ["Solar", "Eólico", "PCH"],
+          datasets: [
+            {
+              label: "Power",
+              data: [solar, wind, pch],
+              borderWidth: 1,
+              backgroundColor: ["yellow", "green", "blue"],
+              borderColor: "#777",
+              hoverBorderWidth: 3,
+              hoverBorderColor: "#000"
+            }
+          ]
+        }
+      });
+    });
+  }
+
+  async getChart4Data() {
+    await api.get("generationunit/active/true").then(response => {
+      console.log(response);
+      let solar = 0,
+        wind = 0,
+        pch = 0;
+
+      response.data.map(el => {
+        if (el.gu_type == "Solar") solar++;
+        if (el.gu_type == "PCH") pch++;
+        if (el.gu_type == "Eólico") wind++;
+      });
+
+      this.setState({
+        chartData4: {
           labels: ["Solar", "Eólico", "PCH"],
           datasets: [
             {
@@ -93,7 +161,7 @@ export default class charts extends Component {
 
               <div className="card mb-3">
                 <div className="card-header">
-                  <i className="fas fa-chart-area" /> Geração
+                  <i className="fas fa-chart-area" /> Demanda de geração
                 </div>
                 <div className="card-body">
                   <Line
@@ -114,15 +182,15 @@ export default class charts extends Component {
               </div>
 
               <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-4">
                   <div className="card mb-3">
                     <div className="card-header">
-                      <i className="fas fa-chart-bar" /> Bar Chart Example
+                      <i className="fas fa-chart-pie" /> Geradores - Cadastrados
                     </div>
                     <div className="card-body">
-                      <Bar
-                        height={120}
-                        data={this.state.chartData1}
+                      <Pie
+                        height={300}
+                        data={this.state.chartData2}
                         options={{
                           legend: {
                             labels: {
@@ -137,10 +205,10 @@ export default class charts extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-4">
                   <div className="card mb-3">
                     <div className="card-header">
-                      <i className="fas fa-chart-pie" /> Tipos de Geradores
+                      <i className="fas fa-chart-pie" /> Geradores - Disponiveis
                     </div>
                     <div className="card-body">
                       <Pie
@@ -160,15 +228,15 @@ export default class charts extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-3">
+                <div className="col-lg-4">
                   <div className="card mb-3">
                     <div className="card-header">
-                      <i className="fas fa-chart-pie" /> Pie Chart Example
+                      <i className="fas fa-chart-pie" /> Geradores - Ativos
                     </div>
                     <div className="card-body">
                       <Pie
                         height={300}
-                        data={this.state.chartData3}
+                        data={this.state.chartData4}
                         options={{
                           legend: {
                             labels: {

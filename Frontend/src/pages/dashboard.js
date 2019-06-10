@@ -156,7 +156,7 @@ export default class Dashboard extends Component {
 
               <div className="card mb-3">
                 <div className="card-header">
-                  <i className="fas fa-chart-area" /> Area Chart Example
+                  <i className="fas fa-chart-area" /> Requisição de geração
                 </div>
                 <div className="card-body">
                   <Line

@@ -9,25 +9,23 @@ const mqtt = require("mqtt");
  */
 
 // Nome da microrrede simulada
-const microgridId = "mg2";
+const microgridId = "MicroGrid2";
 const GUs = [
-  "gu1mg2",
-  "gu2mg2",
-  "gu3mg2",
-  "gu4mg2",
-  "gu5mg2",
-  "gu6mg2",
-  "gu7mg2",
-  "gu8mg2",
-  "gu9mg2",
-  "gu10mg2"
+  "GU1MG2",
+  "GU2MG2",
+  "GU3MG2",
+  "GU4MG2",
+  "GU5MG2",
+  "GU6MG2",
+  "GU7MG2",
+  "GU8MG2",
+  "GU9MG2",
+  "GU10MG2"
 ];
 
-// Configuracao do cliente MQTT - ADD EXPLICACAO DE CADA LINHA
+// Configuracao do cliente MQTT
 client_options = {
   clientId: microgridId,
-  //username: "test",
-  //password: "password",
   clean: true,
   qos: 0 //0, 1, 2
 };
@@ -40,25 +38,10 @@ const clientMQTT = mqtt.connect("mqtt://localhost", client_options);
 // Geradora de valores aleatorios de sensor
 function randomSensorValues(guName) {
   clientMQTT.publish(
-    `microgrid/${microgridId}/gunit/${guName}/meter `,
-    String(Math.floor(Math.random() * 100)) //gera de 0 a 99
+    `microgrid/${microgridId}/gunit/${guName}/meter`,
+    String(Math.floor(Math.random() * 10)) //gera de 0 a 9
   );
 }
-
-// Funcao que adiciona as unidades geradoras definidas no generationUnits.json
-// function addGUs() {
-//   const generationUnits = require("./generationUnits.json");
-
-//   generationUnits.map(gu => {
-//     axios
-//       .request({
-//         method: "post",
-//         url: "http://localhost:3000/api/generationunit",
-//         data: gu
-//       })
-//       .catch(err => console.log(err));
-//   });
-// }
 
 function activateGUs() {}
 GUs.map(guName => {
@@ -77,23 +60,11 @@ GUs.map(guName => {
   });
 });
 
-// Funcao disparada pelo evento de connect
-// clientMQTT.on("connect", function() {
-
-// });
-
 // Funcao disparada pelo evento de recebimento de mensagem
 clientMQTT.on("message", function(topic, payload) {
-  console.log([topic, payload].join("=> "));
+  console.log([topic, payload].join(" => "));
 });
 
 //------------------------------------------------
 
-/**
- * Ordem de teste
- *
- * Add as unidades geradoras
- * Ativa as GU por connect e subscribe
- */
-//addGUs();
 activateGUs();

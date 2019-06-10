@@ -9,14 +9,12 @@ const mqtt = require("mqtt");
  */
 
 // Nome da microrrede simulada
-const microgridId = "mg3";
-const GUs = ["gu1mg3"];
+const microgridId = "MicroGrid3";
+const GUs = ["GU1MG3"];
 
 // Configuracao do cliente MQTT - ADD EXPLICACAO DE CADA LINHA
 client_options = {
   clientId: microgridId,
-  //username: "test",
-  //password: "password",
   clean: true,
   qos: 0 //0, 1, 2
 };
@@ -28,26 +26,8 @@ const clientMQTT = mqtt.connect("mqtt://localhost", client_options);
 
 // Geradora de valores aleatorios de sensor
 function randomSensorValues(guName) {
-  clientMQTT.publish(
-    `microgrid/${microgridId}/gunit/${guName}/meter `,
-    String(Math.floor(Math.random() * 100)) //gera de 0 a 99
-  );
+  clientMQTT.publish(`microgrid/${microgridId}/gunit/${guName}/meter`, 100);
 }
-
-// Funcao que adiciona as unidades geradoras definidas no generationUnits.json
-// function addGUs() {
-//   const generationUnits = require("./generationUnits.json");
-
-//   generationUnits.map(gu => {
-//     axios
-//       .request({
-//         method: "post",
-//         url: "http://localhost:3000/api/generationunit",
-//         data: gu
-//       })
-//       .catch(err => console.log(err));
-//   });
-// }
 
 function activateGUs() {}
 GUs.map(guName => {
@@ -66,23 +46,11 @@ GUs.map(guName => {
   });
 });
 
-// Funcao disparada pelo evento de connect
-// clientMQTT.on("connect", function() {
-
-// });
-
 // Funcao disparada pelo evento de recebimento de mensagem
 clientMQTT.on("message", function(topic, payload) {
-  console.log([topic, payload].join("=> "));
+  console.log([topic, payload].join(" => "));
 });
 
 //------------------------------------------------
 
-/**
- * Ordem de teste
- *
- * Add as unidades geradoras
- * Ativa as GU por connect e subscribe
- */
-//addGUs();
 activateGUs();

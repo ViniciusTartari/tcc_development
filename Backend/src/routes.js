@@ -18,6 +18,7 @@ const UserController = require("./controllers/UserController");
 const GUController = require("./controllers/GenerationUnitController");
 const LogController = require("./controllers/LogController");
 const SRController = require("./controllers/SINRequestController");
+const GenerationController = require("./controllers/GenerationController");
 
 /**
  * Optimizer
@@ -55,10 +56,10 @@ routes.delete("/generationunit/:id", GUController.delete);
 routes.get("/generationunit/name/:name", GUController.getByName);
 // Get by model
 routes.get("/generationunit/model/:model", GUController.getByModel);
+// Get microgrids
+routes.get("/microgrid", GUController.microgrids);
 // Get by microgrid
 routes.get("/generationunit/microgrid/:microgrid", GUController.getByMicrogrid);
-// Get sum by type
-routes.get("/generationunit/typesum", GUController.typeSum);
 // Get GU actives
 routes.get("/generationunit/active/:status", GUController.actives);
 // Get GU availables
@@ -93,8 +94,10 @@ routes.get("/log/type/:type", LogController.getByType);
 routes.get("/log/guname/:guName", LogController.getByGU);
 
 /**
- * Generation request
+ * Generation
  */
-routes.post("/generationrequest", Optimizer.handleRequest);
+// Create - Acesso interno
+// Read
+routes.get("/generation", GenerationController.read);
 
 module.exports = routes;

@@ -9,7 +9,10 @@ const mosca = require("mosca");
 //Iniciando o app
 const app = express();
 
-//configuracoes do mosca - broker mqtt
+// -----------------------------------------------------------------------
+/**
+ * Configuração do mosca (Broker MQTT)
+ */
 const ascoltatore = {
   type: "mongo",
   url: "mongodb://localhost:27017/moscaTCC",
@@ -34,7 +37,9 @@ function setup() {
   console.log("Mosca server is up and running!");
 }
 
-//end mosca
+// Final da configuração do mosca (broker MQTT)
+
+// -----------------------------------------------------------------------
 
 //Permite a aplicação recebimento de json
 app.use(express.json());
@@ -46,7 +51,7 @@ Pode receber parâmetros como domínios que podem acessar, entre outros;
 app.use(cors());
 
 // Mostra as requisicoes http que o servidor receber no console;
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 //Iniciando o DB
 mongoose.connect("mongodb://localhost:27017/tcc", { useNewUrlParser: true });
@@ -72,7 +77,7 @@ moscaServer.on("clientConnected", function(packet) {
   };
   sendLog(log);
 
-  console.log("Microrrede " + log.log_client + " conectada!");
+  console.log(log.log_client + " conectad@!");
 });
 
 // Dispara quando um cliente se desconecta
@@ -86,7 +91,7 @@ moscaServer.on("clientDisconnected", function(packet) {
   //enviar available false para todas as gu da mg
   handleDisconnect(log);
 
-  console.log("Microrrede " + log.log_client + " disconectada!");
+  console.log(log.log_client + " disconectad@!");
 });
 
 // Dispara quando uma mensagem eh publicada
@@ -136,7 +141,7 @@ moscaServer.on("published", function(packet) {
       log_payload: packet.payload.toString("utf8")
     };
     sendLog(log);
-    console.log(log.log_topic + " - " + log.log_payload);
+    //console.log(log.log_topic + " - " + log.log_payload);
 
     // Envia para a tabela de informacao das unidades geradoras
     sendInfo(log);
@@ -161,7 +166,6 @@ sendLog = log => {
 // Função que envia os dados do sensor da unidade geradora para a api
 sendInfo = async log => {
   var arrayinfo = log.log_topic.split("/");
-  //console.log(arrayinfo);
 
   const guId = await axios
     .request({
@@ -170,14 +174,13 @@ sendInfo = async log => {
     })
     .catch(err => console.log(err));
 
-  // console.log(guId.data[0]._id);
   let obj;
 
   if (arrayinfo[4] == "available") {
     obj = {
       gu_available: log.log_payload
     };
-  } else {
+  } else if (arrayinfo[4] == "meter") {
     obj = {
       gu_meter: log.log_payload
     };
@@ -204,7 +207,7 @@ handleDisconnect = async log => {
     await axios.request({
       method: "put",
       url: `http://localhost:3000/api/generationunit/${gu._id}`,
-      data: { gu_available: false }
+      data: { gu_available: false, gu_active: false, gu_generating: 0 }
     });
   });
 };

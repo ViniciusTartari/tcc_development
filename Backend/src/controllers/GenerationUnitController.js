@@ -25,6 +25,22 @@ module.exports = {
     }
   },
 
+  // Get microgrids
+  async microgrids(req, res) {
+    const generationunit = await GenerationUnit.aggregate([
+      {
+        $group: {
+          _id: "$gu_microgrid",
+          qntGU: { $sum: 1 },
+          actualPower: { $sum: "$gu_generating" },
+          totalPower: { $sum: "$gu_maxPower" }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]);
+    return res.json(generationunit);
+  },
+
   // Update
   async update(req, res) {
     const generationunit = await GenerationUnit.findByIdAndUpdate(
@@ -99,12 +115,3 @@ module.exports = {
     return res.json(generationunit);
   }
 };
-
-/**
- * Banco de pesquisas - MONGODB
- */
-
-// db.getCollection('generationunits').aggregate([
-//   {$group:{_id: "$gu_microgrid", totalPower: {$sum: "$gu_maxPower"}}},
-//   {$sort: {_id: 1}}
-// ])
