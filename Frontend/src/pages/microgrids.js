@@ -19,7 +19,7 @@ export default class Tables extends Component {
   }
 
   async getTableData() {
-    await Axios.get("http://localhost:3000/api/generationunit")
+    await Axios.get("http://localhost:3000/api/microgrid")
       .then(response => {
         this.setState({ tableData: response.data }, () => {
           console.log(this.state);
@@ -58,29 +58,26 @@ export default class Tables extends Component {
                         <tr>
                           <th>ID</th>
                           <th>Unidades Geradoras</th>
+                          <th>Potência Atual</th>
                           <th>Potência Máxima</th>
-                          <th>Ativa</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
                           <th>ID</th>
                           <th>Unidades Geradoras</th>
+                          <th>Potência Atual</th>
                           <th>Potência Máxima</th>
-                          <th>Ativa</th>
                         </tr>
                       </tfoot>
                       <tbody>
                         {this.state.tableData.map(data => {
                           return (
                             <tr>
-                              <td>{data.gu_name}</td>
-                              <td>{data.gu_model}</td>
-                              <td>{data.gu_microgrid}</td>
-                              <td>{data.gu_type}</td>
-                              <td>{data.gu_maxPower}</td>
-                              <td>{JSON.stringify(data.gu_available)}</td>
-                              <td>{JSON.stringify(data.gu_active)}</td>
+                              <td>{data._id}</td>
+                              <td>{data.qntGU}</td>
+                              <td>{data.actualPower}</td>
+                              <td>{data.totalPower}</td>
                             </tr>
                           );
                         })}
