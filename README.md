@@ -16,19 +16,29 @@
 - `MongoDB`
 - `ReactJS`
 - `Axios`
-- `Socket.io`
 - `Cors`
 - `Bunyan`
 - `Morgan`
 - `Mqtt`
 - `Require-dir`
 - `Mosca`
-- `Bunyan`
-- `Mqtt`
 - `Mongoose*`
 - `Mongoose-paginate`
 - `Nodemon*`
+- `React-router-dom`
+- `Chart.js`
+- `React-chartjs-2`
 
 \*_Dependência de desenvolvimento_
 
 ---
+
+<h2>Instalação
+
+<h3>Backend
+
+`cd Backend && yarn install && yarn start`
+
+<h3>Frontend
+
+`cd Frontend && yarn install && yarn start`
