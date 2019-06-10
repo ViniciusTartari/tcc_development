@@ -1,83 +1,83 @@
 {
   "sr_bodyRequest": [
     {
-      "horario": "00:00",
+      "horario": "0:00",
       "potencia": 30000
     },
     {
-      "horario": "00:30",
+      "horario": "0:30",
       "potencia": 28000
     },
     {
-      "horario": "01:00",
+      "horario": "1:00",
       "potencia": 25000
     },
     {
-      "horario": "01:30",
+      "horario": "1:30",
       "potencia": 22000
     },
     {
-      "horario": "02:00",
+      "horario": "2:00",
       "potencia": 20000
     },
     {
-      "horario": "02:30",
+      "horario": "2:30",
       "potencia": 20000
     },
     {
-      "horario": "03:00",
+      "horario": "3:00",
       "potencia": 18000
     },
     {
-      "horario": "03:30",
+      "horario": "3:30",
       "potencia": 18000
     },
     {
-      "horario": "04:00",
+      "horario": "4:00",
       "potencia": 22000
     },
     {
-      "horario": "04:30",
+      "horario": "4:30",
       "potencia": 25000
     },
     {
-      "horario": "05:00",
+      "horario": "5:00",
       "potencia": 28000
     },
     {
-      "horario": "05:30",
+      "horario": "5:30",
       "potencia": 30000
     },
     {
-      "horario": "06:00",
+      "horario": "6:00",
       "potencia": 35000
     },
     {
-      "horario": "06:30",
+      "horario": "6:30",
       "potencia": 35500
     },
     {
-      "horario": "07:00",
+      "horario": "7:00",
       "potencia": 36000
     },
     {
-      "horario": "07:30",
+      "horario": "7:30",
       "potencia": 37000
     },
     {
-      "horario": "08:00",
+      "horario": "8:00",
       "potencia": 38000
     },
     {
-      "horario": "08:30",
+      "horario": "8:30",
       "potencia": 40000
     },
     {
-      "horario": "09:00",
+      "horario": "9:00",
       "potencia": 41000
     },
     {
-      "horario": "09:30",
+      "horario": "9:30",
       "potencia": 42000
     },
     {
