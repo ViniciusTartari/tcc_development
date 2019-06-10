@@ -20,6 +20,7 @@ export default class GenerationInfo extends Component {
 
   componentDidMount() {
     this.getRequest();
+    this.getMicrogrids();
     this.getGenerationUnits();
   }
 
@@ -28,18 +29,23 @@ export default class GenerationInfo extends Component {
       this.setState({
         SINrequest: {
           id: response.data[0]._id,
-          addedAt: response.data[0].sr_addedAt,
-          bodyRequest: response.data[0].sr_bodyRequest
+          addedAt: response.data[0].sr_addedAt
         }
       });
-      console.log(this.state.SINrequest);
     });
   };
 
   getGenerationUnits = async () => {
-    await api.get("generationunit").then(response => {
+    await api.get("generationunit/active/true").then(response => {
       this.setState({ generationunits: response.data });
       console.log(this.state.generationunits);
+    });
+  };
+
+  getMicrogrids = async () => {
+    await api.get("microgrid").then(response => {
+      this.setState({ microgrids: response.data });
+      console.log(this.state.microgrids);
     });
   };
 
@@ -67,24 +73,10 @@ export default class GenerationInfo extends Component {
                     Requisição ativa: {this.state.SINrequest.id}
                   </h3>
                   <br />
-                  <div className="row">
-                    <div className="col-md-6">
-                      <h5 className="text-center">
-                        Requisição recebida em:{" "}
-                        {Date(this.state.SINrequest.addedAt)}
-                      </h5>
-                    </div>
-                    <div className="col-md-6">
-                      <h5 className="text-center">
-                        Horário de ação: {Date(Date.now()).toString()}
-                      </h5>
-                    </div>
-                  </div>
-                  <br />
+
                   <h5 className="text-center">
-                    Percentual produzido, por toda a rede, para demanda atual:
+                    Requisição recebida em: {this.state.SINrequest.addedAt}
                   </h5>
-                  <h3 className="text-center">10%</h3>
                 </div>
               </div>
               <div className="card mb-3">
@@ -103,28 +95,26 @@ export default class GenerationInfo extends Component {
                       <thead>
                         <tr>
                           <th>ID</th>
+                          <th>Unidade Geradoras</th>
                           <th>Potência Atual</th>
                           <th>Potência Máxima</th>
-                          <th>Percentual da Requisição</th>
-                          <th>Potêncial gerado</th>
                         </tr>
                       </thead>
                       <tbody>
                         {this.state.microgrids.map(data => {
                           return (
                             <tr>
-                              <td>{data.mg_name}</td>
-                              <td>{data.mg_power}</td>
-                              <td>{data.mg_maxPower}</td>
-                              <td>{data.mg_percentual}</td>
-                              <td>{data.mg_generated}</td>
+                              <td>{data._id}</td>
+                              <td>{data.qntGU}</td>
+                              <td>{data.actualPower}</td>
+                              <td>{data.totalPower}</td>
                             </tr>
                           );
                         })}
                       </tbody>
                     </table>
                   </div>
-                  <h3 className="text-center">Por Unidade Geradora</h3>
+                  <h3 className="text-center">Unidades Geradoras Ativas</h3>
                   <div className="table-responsive">
                     <table
                       className="table table-bordered"
@@ -153,7 +143,7 @@ export default class GenerationInfo extends Component {
                               <td>{data.gu_type}</td>
                               <td>{data.gu_maxPower}</td>
                               <td>{data.gu_meter}</td>
-                              <td>Calculado</td>
+                              <td>{data.gu_generating}</td>
                             </tr>
                           );
                         })}
