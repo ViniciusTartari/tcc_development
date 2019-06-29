@@ -26,7 +26,10 @@ const clientMQTT = mqtt.connect("mqtt://localhost", client_options);
 
 // Geradora de valores aleatorios de sensor
 function randomSensorValues(guName) {
-  clientMQTT.publish(`microgrid/${microgridId}/gunit/${guName}/meter`, 100);
+  clientMQTT.publish(
+    `microgrid/${microgridId}/gunit/${guName}/meter`,
+    String(10)
+  );
 }
 
 function activateGUs() {}

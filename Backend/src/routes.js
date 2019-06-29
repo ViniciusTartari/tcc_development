@@ -21,11 +21,6 @@ const SRController = require("./controllers/SINRequestController");
 const GenerationController = require("./controllers/GenerationController");
 
 /**
- * Optimizer
- */
-const Optimizer = require("./optimizer");
-
-/**
  * User
  */
 // Create
@@ -58,6 +53,8 @@ routes.get("/generationunit/name/:name", GUController.getByName);
 routes.get("/generationunit/model/:model", GUController.getByModel);
 // Get microgrids
 routes.get("/microgrid", GUController.microgrids);
+// Get total generation power
+routes.get("/totalpower", GUController.totalpower);
 // Get by microgrid
 routes.get("/generationunit/microgrid/:microgrid", GUController.getByMicrogrid);
 // Get GU actives

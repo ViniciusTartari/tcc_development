@@ -835,11 +835,17 @@
   },
   {
     "gu_name": "GU1MG3",
-    "gu_model": "Vila Galupo (Rio Santana) - Bom Sucesso do Sul - PR",
+    "gu_model": "PCH",
     "gu_microgrid": "MicroGrid3",
     "gu_type": "PCH",
-    "gu_maxPower": 5670000,
+    "gu_maxPower": 3000000,
     "gu_active": false,
-    "gu_available": false
+    "gu_available": false,
+    "gu_powerCurve": [
+      {
+        "in": 10,
+        "out": 3000000
+      }
+    ]
   }
 ]

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const SINRequest = mongoose.model("SINRequest");
 
-const optimizer = require("../optimizer");
+const controller = require("../controller");
 
 module.exports = {
   /*
@@ -15,7 +15,7 @@ module.exports = {
 
     // Dispara o otimizador
     // const optimized = await optimizer.handleRequest(request);
-    optimizer.handleRequest(request);
+    controller.handleRequest(request);
 
     return res.json(request);
   },

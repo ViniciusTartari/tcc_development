@@ -41,6 +41,19 @@ module.exports = {
     return res.json(generationunit);
   },
 
+  // Get total generation power
+  async totalpower(req, res) {
+    const generationunit = await GenerationUnit.aggregate([
+      {
+        $group: {
+          _id: "",
+          totalPower: { $sum: "$gu_maxPower" }
+        }
+      }
+    ]);
+    return res.json(generationunit);
+  },
+
   // Update
   async update(req, res) {
     const generationunit = await GenerationUnit.findByIdAndUpdate(
